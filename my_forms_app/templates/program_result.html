@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Инфорамция о программе</h2>
+
+<form method="get" class="filter-form mb-3">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="text" name="name" value="{{ name_filter }}" class="form-control" placeholder="Фильтр по названию ОП">
+    </div>
+
+    <div class="form-group col-md-2">
+      <button type="submit" class="filter-button">Фильтровать</button>
+    </div>
+  </div>
+</form>
+
+<table class="table">
+  <tr>
+    <th>
+      <a href="?sort={% if current_sort == 'name' %}-name{% else %}name{% endif %}">
+        Название ОП {% if current_sort == 'name' %}↑{% elif current_sort == '-name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>Ссылка</th>
+    <th>Описание</th>
+    <th>Что изучается</th>
+    <th>Преимущества</th>
+    <th>Карьерные перспективы</th>
+  </tr>
+
+  {% for res in result %}
+  <tr>
+    <td>{{ res.name }}</td>
+    <td style="word-break: break-word; max-width: 200px;">{{ res.link }}</td>
+    <td>{{ res.description }}</td>
+    <td>{{ res.learning_outcomes }}</td>
+    <td>{{ res.advantages }}</td>
+    <td>{{ res.career_prospects }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Статистика по таблице</h3>
+<p>Всего записей в таблице: {{ result|length }}</p> 
+<p>Статистика по ОП (самая популярная прогрмма) —
+{% if most_popular %}
+  {{ most_popular.name }} ({{ most_popular.count }} чел.)
+{% endif %}
+</p> 
+<a href="{% url 'my_app:add_program' %}" class="filter-button">Добавить ещё</a>
+{% endblock %}

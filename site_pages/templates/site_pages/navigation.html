@@ -1,0 +1,10 @@
+<ul class="nav nav-pills flex-wrap justify-content-center gap-2">
+    
+    {% for page in site_pages %}
+        <li class="nav-item">
+            <a class="nav-link nav-custom" href="{% url 'site_pages:site_page' slug=page.slug %}">
+                {{ page.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

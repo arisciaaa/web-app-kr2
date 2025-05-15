@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Список студентов</h2>
+
+<form method="get" class="filter-form mb-3">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="text" name="second_name" value="{{ second_name_filter }}" class="form-control" placeholder="Фильтр по фамилии">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="name" value="{{ name_filter }}" class="form-control" placeholder="Фильтр по имени">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="parent_name" value="{{ parent_name_filter }}" class="form-control" placeholder="Фильтр по отчеству">
+    </div> 
+    <div class="form-group col-md-4">
+      <input type="text" name="program_name" value="{{ program_name_filter }}" class="form-control" placeholder="Фильтр по названию ОП">
+    </div> 
+    <div class="form-group col-md-2">
+      <button type="submit" class="filter-button">Фильтровать</button>
+    </div>   
+  </div>
+</form>
+
+<table class="table">
+  <tr>
+    <th>Фото</th>
+    <th>
+      <a href="?sort={% if current_sort == 'second_name' %}-second_name{% else %}second_name{% endif %}">
+        Фамилия {% if current_sort == 'second_name' %}↑{% elif current_sort == '-second_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'name' %}-name{% else %}name{% endif %}">
+        Имя {% if current_sort == 'name' %}↑{% elif current_sort == '-name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'parent_name' %}-parent_name{% else %}parent_name{% endif %}">
+        Отчество {% if current_sort == 'parent_name' %}↑{% elif current_sort == '-parent_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'program_name' %}-program_name{% else %}program_name{% endif %}">
+        Название ОП {% if current_sort == 'program_name' %}↑{% elif current_sort == '-program_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>Почта</th>
+    <th>Телефон</th>
+    <th>Резюме</th>
+  </tr>
+
+  {% for student in students %}
+  <tr>
+    <td><img src="{{ student.photo.url }}" width="100"></td>
+    <td>{{ student.second_name }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ student.parent_name }}</td>
+    <td>{{ student.program_name }}</td>
+    <td>{{ student.email }}</td>
+    <td>{{ student.phone }}</td>
+    <td>{{ student.resume }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+<h3>Статистика по таблице</h3>
+<p>Всего записей в таблице: {{ students|length }}</p> 
+<p>Статистика по ОП (кол-во студентов, чел.):</p> 
+<ul>
+  {% for stat in program_stats %}
+    <li>{{ stat.program_name }}: {{ stat.count }} </li>
+  {% endfor %}
+</ul>  
+
+<a href="{% url 'my_app:add_student' %}" class="filter-button">Добавить ещё</a>
+
+{% endblock %}

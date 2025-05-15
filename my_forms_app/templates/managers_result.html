@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Инфорамция о менеджменте</h2>
+
+<form method="get" class="filter-form mb-3">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="text" name="second_name" value="{{ second_name_filter }}" class="form-control" placeholder="Фильтр по фамилии">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="name" value="{{ name_filter }}" class="form-control" placeholder="Фильтр по имени">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="parent_name" value="{{ parent_name_filter }}" class="form-control" placeholder="Фильтр по отчеству">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="role" value="{{ role_filter }}" class="form-control" placeholder="Фильтр по должности">
+    </div>
+    <div class="form-group col-md-4">
+      <input type="text" name="program_name" value="{{ program_name_filter }}" class="form-control" placeholder="Фильтр по названию ОП">
+    </div>    
+    <div class="form-group col-md-2">
+      <button type="submit" class="filter-button">Фильтровать</button>
+    </div>       
+  </div>
+</form>
+
+<table class="table">
+  <tr>
+    <th>Фото</th>
+    <th>
+      <a href="?sort={% if current_sort == 'second_name' %}-second_name{% else %}second_name{% endif %}">
+        Фамилия {% if current_sort == 'second_name' %}↑{% elif current_sort == '-second_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'name' %}-name{% else %}name{% endif %}">
+        Имя {% if current_sort == 'name' %}↑{% elif current_sort == '-name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'parent_name' %}-parent_name{% else %}parent_name{% endif %}">
+        Отчество {% if current_sort == 'parent_name' %}↑{% elif current_sort == '-parent_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>Должность</th>
+    <th>
+      <a href="?sort={% if current_sort == 'program_name' %}-program_name{% else %}program_name{% endif %}">
+        Название ОП {% if current_sort == 'program_name' %}↑{% elif current_sort == '-program_name' %}↓{% endif %}
+      </a>
+    </th>
+    <th>
+      <a href="?sort={% if current_sort == 'email' %}-email{% else %}email{% endif %}">
+        Почта {% if current_sort == 'email' %}↑{% elif current_sort == '-email' %}↓{% endif %}
+      </a>
+    </th>
+  </tr>
+  {% for i in info %}
+  <tr>
+    <td><img src="{{ i.photo.url }}" width="100"></td>
+    <td>{{ i.second_name }}</td>
+    <td>{{ i.name }}</td>
+    <td>{{ i.parent_name }}</td>
+    <td>{{ i.role }}</td>
+    <td>{{ i.program_name }}</td>
+    <td>{{ i.email }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>Статистика по таблице</h3>
+<p>Всего записей в таблице: {{ info|length }}</p>
+<p>Распределение ролей:</p>
+<ul>
+  {% for item in role_stats %}
+    <li>{{ item.role }}: {{ item.count }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'my_app:add_managers' %}" class="filter-button">Добавить ещё</a>
+{% endblock %}

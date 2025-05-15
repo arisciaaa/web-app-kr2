@@ -1,0 +1,106 @@
+
+.bgc {
+    background-color: #6c63ff;
+}
+
+.bg-header {
+    background: linear-gradient(90deg, #6c63ff, #948cff);
+    padding: 1rem 1.5rem;
+}
+
+
+.card {
+    border-radius: 1rem !important;
+}
+
+
+.card.shadow-sm {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+}
+
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+input, textarea, select {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+
+button, .btn {
+    border-radius: 0.5rem;
+}
+
+table td {
+    vertical-align: top;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* Навигационные ссылки */
+.nav-custom {
+    background-color: #f8f9fa;
+    color: #333;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+}
+
+.nav-custom:hover {
+    background-color: #6c63ff;
+    color: #fff;
+    border-color: #6c63ff;
+    text-decoration: none;
+}
+
+
+.filter-form select, .filter-form input {
+    border-radius: 1.5rem;
+    border: 1px solid #ced4da;
+    padding: 0.4rem 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-form select:focus, .filter-form input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 0.15rem rgba(108, 99, 255, 0.25);
+}
+
+
+.filter-button {
+    background-color: #6c63ff;
+    color: #ffffff;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    text-decoration: none;
+}
+
+.filter-button:hover {
+    background-color: #a9a5ff;
+    color: #fff;
+}
+
+/* чтобы не было сильного слипания */
+.filter-form {
+    margin-bottom: 1rem;
+}
